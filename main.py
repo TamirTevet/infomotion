@@ -6,7 +6,7 @@ from pymongo import MongoClient
 # TEST
 filename = "CUDUdocker_unification.wav"
 hebrew = True
-ffmpegPath = "C:\\Users\\Oratl\\Documents\\path\\ffmpeg.exec"
+ffmpegPath = "C:\\Users\\Oratl\\Documents\\path\\ffmpeg.exe"
 # filename = sys.argv[1]
 # language = sys.argv[2]
 # ffmpegPath = sys.argv[3]
