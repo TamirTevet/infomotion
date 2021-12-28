@@ -4,7 +4,7 @@ import subprocess
 from pymongo import MongoClient
 
 # TEST
-filename = "king.wav"
+filename = "CUDUdocker_unification.wav"
 hebrew = True
 ffmpegPath = "C:\\Users\\Oratl\\Documents\\path\\ffmpeg.exec"
 # filename = sys.argv[1]
@@ -60,11 +60,11 @@ def send_data_to_mongo(wordInPart, timestamp, video_name):
 try:
     with sr.AudioFile(filename) as source:
         video_duration = int(source.DURATION)
-        for x in range(0, video_duration, 60):
+        for x in range(0, video_duration, 120):
             minute_offset: int = x
             minute_duration: int = x + 60
             # TEST
-            # audio_data = r.record(source, offset=minute_offset, duration=minute_duration)
+            audio_data = r.record(source, offset=minute_offset, duration=minute_duration)
             if hebrew:
                 # TEST
                 text = "אין צדק בחיים נכון ידידי הקטן בזמן שחלק נולדו לחגוג אחרים מעבירים את חייהם בחשיכה מתחננים בלי שאריות מדיסני כל מה שאתה רואה מתקיים בשיווי משקל עדין עם הבמאי של ספר הג׳ונגל בזמן שאחרים מחפשים מה הם יכולים לקחת מלאך אמיתי מחפש מה הוא יכול לתת הקיץ ברח מסיבה או לעולם אל תחזור אלי אתה חייב לחזור למקומך גלגל החיים מלך האריות"
@@ -85,6 +85,7 @@ try:
                 time = temp1 + " - " + temp2
             # TEST
             send_data_to_mongo(text, time, filename)
-            # send_data_to_mongo(text['alternative'][0]['transcript'], time, filename)
+            # if type(text) is dict:
+                # send_data_to_mongo(text['alternative'][0]['transcript'], time, filename)
 except Exception as e:
     print(e)
