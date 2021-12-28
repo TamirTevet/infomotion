@@ -14,7 +14,7 @@ ffmpegPath = "C:\\Users\\Oratl\\Documents\\path\\ffmpeg.exec"
 #     hebrew = True
 # else:
 #     hebrew = False
-renew = True
+renew = False
 if renew:
     command = ffmpegPath + " -i " + filename + ".mp4 -ab 160k -ac 2 -ar 44100 -vn .\\" + filename + ".wav"
     subprocess.call(command, shell=True)
