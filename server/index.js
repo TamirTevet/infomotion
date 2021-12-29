@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors');
 const { MongoClient } = require('mongodb')
 
 const PORT = process.env.PORT || 3001;
@@ -7,7 +8,12 @@ const URI = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%2
 const app = express();
 const client = new MongoClient(URI);
 
-
+app.use(
+    cors({
+        origin: 'http://localhost:3000',
+        credentials: true,
+    })
+);
 app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
 });
@@ -25,7 +31,7 @@ app.get('/words', async (req, res) => {
         await client.connect();
         const database = client.db("infomotion");
         const words = database.collection("words");
-        const json = await words.find({'name': word}).toArray();
+        const json = await words.find({ 'name': word }).toArray();
 
         res.json(json);
     } finally {
