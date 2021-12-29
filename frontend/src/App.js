@@ -22,7 +22,11 @@ class App extends React.Component {
     fetch('http://localhost:3000/words?word=' + word)
       .then(res => res.json())
       .then(data => {
-        this.setState({data: data})
+        if (data.length === 0) {
+          alert('There are no results');
+        } else {
+          this.setState({ data: data })
+        }
       })
       .catch(e => console.error(e));
   }
@@ -32,33 +36,42 @@ class App extends React.Component {
       table: {
         minWidth: 650,
       },
+      m: {
+        margin: '0 auto',
+      }
     });
+
+    const isDataEmpty = this.state.data.length == 0;
     return (
       <div className="App">
         {/* <Logo name='InfoMotion' /> */}
         <Searchbar name='word' onSubmit={(e) => this.submitWordHandler(e)} />
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Id</TableCell>
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Video Name</TableCell>
-                <TableCell align="center">Part</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.state.data.map((row) => (
-                <TableRow key={row._id}>
-                  <TableCell component="th" scope="row">{row._id}</TableCell>
-                  <TableCell align="center">{row.name}</TableCell>
-                  <TableCell align="center">{row.stream_name}</TableCell>
-                  <TableCell align="center">{row.part}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {isDataEmpty ? null : (
+          <div className={classes.m}>
+            <TableContainer component={Paper}>
+              <Table className={classes.table} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Id</TableCell>
+                    <TableCell align="center">Name</TableCell>
+                    <TableCell align="center">Video Name</TableCell>
+                    <TableCell align="center">Part</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.state.data.map((row) => (
+                    <TableRow key={row._id}>
+                      <TableCell component="th" scope="row">{row._id}</TableCell>
+                      <TableCell align="center">{row.name}</TableCell>
+                      <TableCell align="center">{row.stream_name}</TableCell>
+                      <TableCell align="center">{row.part}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </div>
+        )}
       </div>
     )
   };
