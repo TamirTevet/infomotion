@@ -3,9 +3,15 @@ html, body, #root, .App {
   height: 99%;
 }
 html, body, #root {
-  background-color: #83b9ff;
+  background-color: rgb(12, 46, 81);
 }
-
+.wrrapper {
+  /* width: 600px; */
+  margin-top: 10%;
+}
+.bold {
+  font-weight: bold;
+}
 .App {
   text-align: center;
   padding: 2px 4px;

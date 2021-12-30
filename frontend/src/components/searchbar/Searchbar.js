@@ -9,7 +9,7 @@ import Divider from '@material-ui/core/Divider'
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: '8px 16px',
-    margin: '10px auto',
+    margin: '30px auto',
     display: 'flex',
     alignItems: 'center',
     width: 600,

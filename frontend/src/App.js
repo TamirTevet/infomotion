@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import logo from './logo.png';
 import './App.css';
 
 import Searchbar from './components/searchbar/Searchbar';
@@ -38,30 +38,31 @@ class App extends React.Component {
       },
       m: {
         margin: '0 auto',
-      }
+      },
     });
 
     const isDataEmpty = this.state.data.length == 0;
     return (
       <div className="App">
         {/* <Logo name='InfoMotion' /> */}
-        <Searchbar name='word' onSubmit={(e) => this.submitWordHandler(e)} />
+        <div className='wrrapper'>
+          <img src={logo} />
+          <Searchbar name='word' onSubmit={(e) => this.submitWordHandler(e)} />
+        </div>
         {isDataEmpty ? null : (
           <div className={classes.m}>
             <TableContainer component={Paper}>
               <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Id</TableCell>
-                    <TableCell align="center">Name</TableCell>
-                    <TableCell align="center">Video Name</TableCell>
-                    <TableCell align="center">Part</TableCell>
+                    <TableCell align="center"><b>Search Word</b></TableCell>
+                    <TableCell align="center"><b>Video Name</b></TableCell>
+                    <TableCell align="center"><b>Minute</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {this.state.data.map((row) => (
                     <TableRow key={row._id}>
-                      <TableCell component="th" scope="row">{row._id}</TableCell>
                       <TableCell align="center">{row.name}</TableCell>
                       <TableCell align="center">{row.stream_name}</TableCell>
                       <TableCell align="center">{row.part}</TableCell>
